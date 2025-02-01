@@ -29,10 +29,6 @@ public class UserEntity {
     private String email;
 
     @Basic
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Basic
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
