@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: twitter-clone-user-service
+          uri: lb://twitter-clone-user-service
+          predicates:
+            - Path=/users/**
+
+        - id: twitter-clone-auth-service
+          uri: lb://twitter-clone-auth-service
+          predicates:
+            - Path=/auth/**
+
+        - id: twitter-clone-tweet-service
+          uri: lb://twitter-clone-tweet-service
+          predicates:
+            - Path=/tweets/**
+
+        - id: twitter-clone-follow-service
+          uri: lb://twitter-clone-follow-service
+          predicates:
+            - Path=/follows/**
+
+          
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
