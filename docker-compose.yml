@@ -1,4 +1,16 @@
 services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: twitter_clone
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - twitter-clone-network
+
   discovery-server:
     image: eureka-server
     build: ./discovery-server
@@ -47,15 +59,17 @@ services:
     networks:
       - twitter-clone-network
 
-  follow-service:
-    image: follow-service
-    build: ./follow-service
-    ports:
-      - "8084:8084"
-    depends_on:
-      - discovery-server
-    networks:
-      - twitter-clone-network
+  #follow-service:
+  #  image: follow-service
+  #  build: ./follow-service
+  #  ports:
+  #    - "8084:8084"
+  #  depends_on:
+  #    - discovery-server
+  #  networks:
+  #    - twitter-clone-network
+
+
 
 networks:
   twitter-clone-network:
