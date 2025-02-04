@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "users", schema = "user-service")
+@Table(name = "users", schema = "twitter_clone")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,12 +33,12 @@ public class UserEntity {
     private LocalDate birthday;
 
     @Basic
-    @Column(name = "followers", nullable = true)
-    private int followers;
+    @Column(name = "followers_count", nullable = true)
+    private int followersCount;
 
     @Basic
-    @Column(name = "following", nullable = true)
-    private int following;
+    @Column(name = "following_count", nullable = true)
+    private int followingCount;
 
     @Basic
     @Column(name = "token", nullable = true)

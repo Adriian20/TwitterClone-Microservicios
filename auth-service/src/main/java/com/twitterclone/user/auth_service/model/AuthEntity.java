@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "auth", schema = "auth-service")
+@Table(name = "auth", schema = "twitter_clone")
 public class AuthEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,8 @@ public class AuthEntity {
     private String email;
 
     @Basic
-    @Column(name = "password", nullable = false)
-    private String password;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
     @Basic
     @Column(name = "birthday", nullable = false)

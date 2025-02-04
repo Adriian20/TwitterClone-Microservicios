@@ -13,9 +13,10 @@ public class UserMapper {
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
         userDTO.setBirthday(user.getBirthday());
-        userDTO.setFollowers(user.getFollowers());
-        userDTO.setFollowing(user.getFollowing());
+        userDTO.setFollowersCount(user.getFollowersCount());
+        userDTO.setFollowingCount(user.getFollowingCount());
         return userDTO;
+
     }
 
     public UserEntity toEntity(UserDTO userDTO) {
@@ -24,8 +25,9 @@ public class UserMapper {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setBirthday(userDTO.getBirthday());
-        user.setFollowers(userDTO.getFollowers());
-        user.setFollowing(userDTO.getFollowing());
+        user.setFollowersCount(userDTO.getFollowersCount());
+        user.setFollowingCount(userDTO.getFollowingCount());
         return user;
+
     }
 }

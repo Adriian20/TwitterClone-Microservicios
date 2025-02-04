@@ -11,5 +11,5 @@ public class LoginRequest {
     private String email;
 
     @NotEmpty(message = "La contraseña no puede estar vacía")
-    private String password;
+    private String passwordHash;
 }

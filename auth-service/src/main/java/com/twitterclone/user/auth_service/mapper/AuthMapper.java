@@ -13,7 +13,7 @@ public class AuthMapper {
         AuthEntity user = new AuthEntity();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPasswordHash(registerRequest.getPassword());
         user.setBirthday(registerRequest.getBirthday());
         return user;
     }
@@ -21,7 +21,7 @@ public class AuthMapper {
     public AuthEntity toEntity(LoginRequest loginRequest) {
         AuthEntity user = new AuthEntity();
         user.setEmail(loginRequest.getEmail());
-        user.setPassword(loginRequest.getPassword());
+        user.setPasswordHash(loginRequest.getPasswordHash());
         return user;
     }
 }

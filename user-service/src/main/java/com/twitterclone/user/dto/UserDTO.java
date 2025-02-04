@@ -24,7 +24,7 @@ public class UserDTO implements Serializable {
     @Past(message = "La fecha de cumpleaños debe ser una fecha pasada")
     private LocalDate birthday;
 
-    private int followers;
-    private int following;
+    private int followersCount;
+    private int followingCount;
     private String token;
 }

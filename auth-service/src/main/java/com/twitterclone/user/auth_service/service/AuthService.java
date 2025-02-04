@@ -42,8 +42,8 @@ public class AuthService {
                 .map(authFound -> {
                     String token = JwtUtil.generateToken(authFound.getEmail());
                     authFound.setToken(token);
-                    String encodedPassword = passwordEncoder.encode(authFound.getPassword());
-                    authFound.setPassword(encodedPassword);
+                    String encodedPassword = passwordEncoder.encode(authFound.getPasswordHash());
+                    authFound.setPasswordHash(encodedPassword);
                     return authFound;
                 })
                 .map(authRepository::save)
@@ -61,7 +61,7 @@ public class AuthService {
                 })
                 .filter(authToken -> authToken.getToken() == null || authToken.getToken().isEmpty())
                 .filter(authFound -> {
-                    return passwordEncoder.matches(loginRequest.getPassword(), authFound.getPassword());
+                    return passwordEncoder.matches(loginRequest.getPasswordHash(), authFound.getPasswordHash());
                 })
                 .map(authFound -> {
                     String token = JwtUtil.generateToken(authFound.getEmail());
