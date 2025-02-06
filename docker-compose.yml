@@ -59,15 +59,15 @@ services:
     networks:
       - twitter-clone-network
 
-  #follow-service:
-  #  image: follow-service
-  #  build: ./follow-service
-  #  ports:
-  #    - "8084:8084"
-  #  depends_on:
-  #    - discovery-server
-  #  networks:
-  #    - twitter-clone-network
+  follow-service:
+    image: follow-service
+    build: ./follow-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - discovery-server
+    networks:
+      - twitter-clone-network
 
 
 
