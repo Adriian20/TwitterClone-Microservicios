@@ -5,7 +5,7 @@ spring:
   application:
     name: twitter-clone-auth-service
   datasource:
-    url: jdbc:mysql://localhost:3306/twitter_clone
+    url: jdbc:mysql://mysql-db:3306/twitter_clone
     username: root
     password: root
   jpa:
