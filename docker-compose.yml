@@ -1,6 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: twitter_clone
@@ -10,66 +11,107 @@ services:
       - "3306:3306"
     networks:
       - twitter-clone-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   discovery-server:
     image: eureka-server
-    build: ./discovery-server
+    container_name: discovery-server
+    build:
+      context: .
+      dockerfile: discovery-server/Dockerfile
     ports:
       - "8761:8761"
     networks:
       - twitter-clone-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api-gateway:
     image: api-gateway
-    build: ./api-gateway
+    container_name: api-gateway
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
     ports:
       - "8080:8080"
     depends_on:
-      - discovery-server
+      discovery-server:
+        condition: service_healthy
     networks:
       - twitter-clone-network
+    restart: always
 
   auth-service:
     image: auth-service
-    build: ./auth-service
+    container_name: auth-service
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
     ports:
       - "8081:8081"
     depends_on:
-      - discovery-server
+      discovery-server:
+        condition: service_healthy
     networks:
       - twitter-clone-network
+    restart: always
 
   user-service:
     image: user-service
-    build: ./user-service
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
     ports:
       - "8082:8082"
     depends_on:
-      - discovery-server
+      discovery-server:
+        condition: service_healthy
     networks:
       - twitter-clone-network
+    restart: always
 
   tweet-service:
     image: tweet-service
-    build: ./tweet-service
+    container_name: tweet-service
+    build:
+      context: .
+      dockerfile: tweet-service/Dockerfile
     ports:
       - "8083:8083"
     depends_on:
-      - discovery-server
+      discovery-server:
+        condition: service_healthy
     networks:
       - twitter-clone-network
+    restart: always
 
   follow-service:
     image: follow-service
-    build: ./follow-service
+    container_name: follow-service
+    build:
+      context: .
+      dockerfile: follow-service/Dockerfile
     ports:
       - "8084:8084"
     depends_on:
-      - discovery-server
+      discovery-server:
+        condition: service_healthy
     networks:
       - twitter-clone-network
-
-
+    restart: always
 
 networks:
   twitter-clone-network:

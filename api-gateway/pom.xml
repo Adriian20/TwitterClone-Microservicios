@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.twitterclone</groupId>
+        <groupId>com.twitterclone</groupId>
+        <artifactId>TwitterClone-Microservicios</artifactId>
+        <version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+    </parent>
+	<groupId>com.twitterclone.api-gateway</groupId>
 	<artifactId>api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>api-gateway</name>
@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
+		<spring.boot.version>3.4.2</spring.boot.version>
 	</properties>
 	<dependencies>
 		<dependency>
