@@ -1,26 +1,23 @@
-# Etapa de construcción
 FROM eclipse-temurin:21-jdk AS build
+
+WORKDIR /app
 
 # Instalar Maven
 RUN apt-get update && apt-get install -y maven
 
-# Copiar el POM raíz y el código fuente
-COPY pom.xml /app/pom.xml
-COPY discovery-server/pom.xml /app/discovery-server/pom.xml
-COPY discovery-server/src /app/discovery-server/src
+# Copiar los archivos necesarios
+COPY pom.xml .
+COPY discovery-server/pom.xml discovery-server/
+COPY discovery-server/src discovery-server/src
 
-# Construir el proyecto
-WORKDIR /app/discovery-server
-RUN mvn clean package
+# Construir el proyecto desde el directorio raíz
+RUN mvn -f discovery-server/pom.xml clean package -DskipTests
 
-# Etapa de ejecución
 FROM eclipse-temurin:21-jre
 
 # Copiar el JAR generado
-COPY --from=build /app/discovery-server/target/discovery-server-0.0.1-SNAPSHOT.jar /usr/local/lib/discovery-server.jar
+COPY --from=build /app/discovery-server/target/discovery-server-0.0.1-SNAPSHOT.jar /app.jar
 
-# Exponer el puerto de Eureka Server
 EXPOSE 8761
 
-# Ejecutar el JAR
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/discovery-server.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]

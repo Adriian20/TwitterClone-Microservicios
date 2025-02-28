@@ -1,9 +1,9 @@
 server:
   port: 0
-
+  
 spring:
   application:
-    name: twitter-clone-auth-service
+    name: twitter-clone-follow-service
   datasource:
     url: jdbc:mysql://mysql:3307/twitter_clone
     username: root
@@ -12,6 +12,7 @@ spring:
 
     hibernate:
       ddl-auto: update
+      
 
 eureka:
   client:

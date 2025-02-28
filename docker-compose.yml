@@ -5,10 +5,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: twitter_clone
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - twitter-clone-network
     restart: always
@@ -25,7 +23,7 @@ services:
       context: .
       dockerfile: discovery-server/Dockerfile
     ports:
-      - "8761:8761"
+      - "8762:8762" # Cambia 8761 por 8762
     networks:
       - twitter-clone-network
     depends_on:

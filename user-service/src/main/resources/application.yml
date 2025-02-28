@@ -1,11 +1,11 @@
 server:
-  port: 8082
+  port: 0
 
 spring:
   application:
     name: twitter-clone-user-service
   datasource:
-    url: jdbc:mysql://mysql-db:3306/twitter_clone
+    url: jdbc:mysql://mysql:3307/twitter_clone
     username: root
     password: root
   jpa:
